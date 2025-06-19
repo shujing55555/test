@@ -1,0 +1,186 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head>-->
+<!--	<meta charset="UTF-8">-->
+<!--	<title>欢迎登陆</title>-->
+<!--	<link rel="stylesheet" type="text/css" th:href="@{css/login.css}" />-->
+<!--</head>-->
+
+<!--<body>-->
+<!--&lt;!&ndash;	<div class="header">&ndash;&gt;-->
+<!--&lt;!&ndash;		<h1 class="font">递以心</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;		<h1 class="font">送以情</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;	</div>&ndash;&gt;-->
+<!--	<div class="box">-->
+<!--		<h2>登陆</h2>-->
+<!--		<form method="post" th:action="@{/userLogin}">-->
+<!--			<div class="input-box">-->
+<!--				<input name="username" type="text" required="" />-->
+<!--				<label>账号</label>-->
+<!--			</div>-->
+<!--			<div class="input-box">-->
+<!--				<input name="password" type="password" required="" />-->
+<!--				<label>密码</label>-->
+<!--			</div>-->
+<!--			<p style="color: red" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p>-->
+<!--			<input type="submit" value="登陆" />-->
+<!--		</form>-->
+<!--		<p align="center"><a th:href="@{/toRegister}" href="#">没有账号？立即注册</a></p>-->
+<!--	</div>-->
+<!--</body>-->
+
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>社区跑腿服务 - 登录</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						primary: '#3B82F6',  // 主色调：蓝色
+						secondary: '#93C5FD', // 次要色：浅蓝色
+						light: '#DBEAFE',    // 浅色背景：淡蓝色
+						dark: '#1D4ED8'      // 深色：深蓝色
+					},
+					fontFamily: {
+						inter: ['Inter', 'system-ui', 'sans-serif'],
+					},
+				}
+			}
+		}
+	</script>
+	<style type="text/tailwindcss">
+		@layer utilities {
+			.content-auto {
+				content-visibility: auto;
+			}
+			.bg-gradient-custom {
+				background-image: linear-gradient(135deg, #3B82F6 0%, #93C5FD 100%);
+			}
+			.input-focus-effect:focus + label,
+			.input-focus-effect:not(:placeholder-shown) + label {
+				transform: translateY(-24px) scale(0.85);
+				color: #3B82F6;
+			}
+			.card-shadow {
+				box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1), 0 8px 10px -6px rgba(59, 130, 246, 0.1);
+			}
+			.error-message {
+				color: #ef4444;
+				font-size: 0.875rem;
+				margin-top: 0.25rem;
+			}
+		}
+	</style>
+</head>
+<body class="bg-light min-h-screen font-inter flex items-center justify-center p-4">
+<div class="w-full max-w-6xl bg-white rounded-2xl overflow-hidden shadow-xl flex flex-col md:flex-row">
+	<!-- 左侧登录表单区域 -->
+	<div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+		<div class="mb-8">
+			<h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-gray-800 mb-2">欢迎回来</h1>
+			<p class="text-gray-600">请登录您的账号继续使用社区跑腿服务</p>
+		</div>
+
+		<form method="post" th:action="@{/userLogin}" class="space-y-6">
+			<div class="relative">
+				<input name="username" type="text" required=""
+					   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 input-focus-effect peer placeholder-transparent"
+					   placeholder="账号" />
+				<label for="username"
+					   class="absolute left-4 top-3 text-gray-500 transition-all duration-300 pointer-events-none">
+					账号
+				</label>
+			</div>
+
+			<div class="relative">
+				<input name="password" type="password" required=""
+					   class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-300 input-focus-effect peer placeholder-transparent"
+					   placeholder="密码" />
+				<label for="password"
+					   class="absolute left-4 top-3 text-gray-500 transition-all duration-300 pointer-events-none">
+					密码
+				</label>
+			</div>
+
+			<p style="color: red" th:unless="${#strings.isEmpty(message)}" th:text="${message}"></p>
+
+			<button type="submit"
+					class="w-full bg-primary hover:bg-dark text-white font-medium py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-primary/50">
+				<i class="fa fa-sign-in mr-2"></i> 登录
+			</button>
+
+<!--			<div class="flex items-center justify-between">-->
+
+		</form>
+
+		<div class="mt-8 text-center">
+			<p class="text-gray-600">
+				还没有账号? <a href="#" th:href="@{/toRegister}"
+							   class="text-primary hover:text-dark font-medium transition-colors">立即注册</a>
+			</p>
+		</div>
+	</div>
+
+	<!-- 右侧欢迎信息区域 -->
+	<div class="w-full md:w-1/2 bg-gradient-custom p-8 md:p-12 flex flex-col justify-center items-center text-white text-center">
+		<div class="mb-6">
+			<i class="fa fa-heart-o text-5xl md:text-6xl mb-4 opacity-90"></i>
+			<h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold mb-4">欢迎使用社区跑腿服务</h2>
+			<p class="text-lg md:text-xl opacity-90 mb-6">
+				让生活更便捷，让邻里更亲近
+			</p>
+			<div class="flex space-x-4">
+				<div class="bg-white/20 p-4 rounded-lg backdrop-blur-sm">
+					<i class="fa fa-clock-o text-2xl mb-2"></i>
+					<p class="font-medium">高效服务</p>
+				</div>
+				<div class="bg-white/20 p-4 rounded-lg backdrop-blur-sm">
+					<i class="fa fa-users text-2xl mb-2"></i>
+					<p class="font-medium">邻里互助</p>
+				</div>
+				<div class="bg-white/20 p-4 rounded-lg backdrop-blur-sm">
+					<i class="fa fa-shield text-2xl mb-2"></i>
+					<p class="font-medium">安全可靠</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="mt-auto">
+			<p class="opacity-80 text-sm">
+				&copy; 2025 社区跑腿服务平台 - 让社区生活更美好
+			</p>
+		</div>
+	</div>
+</div>
+
+<script>
+	// 为输入框添加动画效果
+	document.querySelectorAll('.input-focus-effect').forEach(input => {
+		// 检查输入框是否已有值
+		if (input.value.trim() !== '') {
+			input.classList.add('not-empty');
+		}
+
+		// 添加焦点和失焦事件
+		input.addEventListener('focus', () => {
+			input.parentElement.classList.add('focused');
+		});
+
+		input.addEventListener('blur', () => {
+			if (input.value.trim() === '') {
+				input.parentElement.classList.remove('focused');
+			}
+		});
+	});
+</script>
+</body>
+</html>
